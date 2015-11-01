@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+   "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+   "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<package name="ade" extends="struts-default">
+		<action name="login" class="uoa.are.action.LoginAction" method="login">
+		</action>
+		<action name="logout" class="uoa.are.action.LoginAction"
+			method="logout">
+		</action>
+
+		<action name="init_prj_list" class="uoa.are.action.ProjectAction"
+			method="initProjectList">
+		</action>
+		<action name="add_prj" class="uoa.are.action.ProjectAction"
+			method="addProject">
+		</action>
+		<action name="edit_prj" class="uoa.are.action.ProjectAction"
+			method="editProject">
+		</action>
+		<action name="delete_prj" class="uoa.are.action.ProjectAction"
+			method="deleteProject">
+		</action>
+
+		<action name="init_sub_list" class="uoa.are.action.SubjectAction"
+			method="initSubjectList">
+		</action>
+		<action name="add_sub" class="uoa.are.action.SubjectAction"
+			method="addSubject">
+		</action>
+		<action name="edit_sub" class="uoa.are.action.SubjectAction"
+			method="editSubject">
+		</action>
+		<action name="delete_sub" class="uoa.are.action.SubjectAction"
+			method="deleteSubject">
+		</action>
+
+		<action name="init_report_list" class="uoa.are.action.ReportAction"
+			method="initReportList">
+		</action>
+
+		<action name="init_device_type_list" class="uoa.are.action.DeviceAction"
+			method="initDeviceTypeList">
+		</action>
+		<action name="init_device_list" class="uoa.are.action.DeviceAction"
+			method="initDeviceList">
+		</action>
+		<action name="init_idle_device_list" class="uoa.are.action.DeviceAction"
+			method="initIdleDeviceList">
+		</action>
+		<action name="add_device" class="uoa.are.action.DeviceAction"
+			method="addDevice">
+		</action>
+
+		<action name="init_user_list" class="uoa.are.action.AdminAction"
+			method="initUserList">
+		</action>
+		<action name="add_user" class="uoa.are.action.AdminAction"
+			method="addUser">
+		</action>
+		<action name="edit_user" class="uoa.are.action.AdminAction"
+			method="editUser">
+		</action>
+		<action name="disable_user" class="uoa.are.action.AdminAction"
+			method="disableUser">
+		</action>
+		<action name="enable_user" class="uoa.are.action.AdminAction"
+			method="enableUser">
+		</action>
+
+		<action name="init_setting_list" class="uoa.are.action.SettingAction"
+			method="initSettingList">
+		</action>
+		<action name="edit_setting" class="uoa.are.action.SettingAction"
+			method="editSetting">
+		</action>
+
+		<action name="init_algorithm_list" class="uoa.are.action.AlgorithmAction"
+			method="initAlgorithmList">
+		</action>
+
+		<action name="init_sys_info_list" class="uoa.are.action.SystemInfoAction"
+			method="initSysInfoList">
+		</action>
+
+		<action name="check_progress" class="uoa.are.action.ProgressAction"
+			method="checkProgress">
+		</action>
+
+		<action name="get_config" class="uoa.are.action.ConfigurationAction"
+			method="get">
+		</action>
+
+	</package>
+</struts>

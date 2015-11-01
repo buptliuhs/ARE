@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>ADE</display-name>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- Download servlet -->
+	<servlet>
+		<servlet-name>DownloadServlet</servlet-name>
+		<servlet-class>uoa.are.report.DownloadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DownloadServlet</servlet-name>
+		<url-pattern>/report/download</url-pattern>
+	</servlet-mapping>
+
+	<!-- Upload servlet -->
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>uoa.are.util.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- Validation servlet -->
+	<servlet>
+		<servlet-name>ValidationServlet</servlet-name>
+		<servlet-class>uoa.are.validation.ValidationServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ValidationServlet</servlet-name>
+		<url-pattern>/ValidationServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- Daily report servlet -->
+	<servlet>
+		<servlet-name>Daily_Overall_Report</servlet-name>
+		<servlet-class>uoa.are.report.daily.OverallReportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Daily_Overall_Report</servlet-name>
+		<url-pattern>/report/daily/overall</url-pattern>
+	</servlet-mapping>
+
+	<!-- Daily detailed report servlet -->
+	<servlet>
+		<servlet-name>Daily_Detailed_Report</servlet-name>
+		<servlet-class>uoa.are.report.daily.DetailedReportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Daily_Detailed_Report</servlet-name>
+		<url-pattern>/report/daily/detailed</url-pattern>
+	</servlet-mapping>
+
+	<!-- Daily per activity report servlet -->
+	<servlet>
+		<servlet-name>Daily_PerAct_Report</servlet-name>
+		<servlet-class>uoa.are.report.daily.PerActReportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Daily_PerAct_Report</servlet-name>
+		<url-pattern>/report/daily/peract</url-pattern>
+	</servlet-mapping>
+
+	<!-- Weekly overall report servlet -->
+	<servlet>
+		<servlet-name>Weekly_Overall_Report</servlet-name>
+		<servlet-class>uoa.are.report.weekly.OverallReportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Weekly_Overall_Report</servlet-name>
+		<url-pattern>/report/weekly/overall</url-pattern>
+	</servlet-mapping>
+
+	<!-- Weekly trend report servlet -->
+	<servlet>
+		<servlet-name>Weekly_Trend_Report</servlet-name>
+		<servlet-class>uoa.are.report.weekly.TrendReportServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Weekly_Trend_Report</servlet-name>
+		<url-pattern>/report/weekly/trend</url-pattern>
+	</servlet-mapping>
+
+	<!-- Activity Signal servlet -->
+	<servlet>
+		<servlet-name>Activity_Signal_Data</servlet-name>
+		<servlet-class>uoa.are.report.activity.ActivitySignalServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Activity_Signal_Data</servlet-name>
+		<url-pattern>/report/activity/signal</url-pattern>
+	</servlet-mapping>
+
+	<!-- Activity Result servlet -->
+	<servlet>
+		<servlet-name>Activity_Result_Data</servlet-name>
+		<servlet-class>uoa.are.report.activity.ActivityResultServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Activity_Result_Data</servlet-name>
+		<url-pattern>/report/activity/result</url-pattern>
+	</servlet-mapping>
+
+	<!-- Activity Range servlet -->
+	<servlet>
+		<servlet-name>Activity_Range_Data</servlet-name>
+		<servlet-class>uoa.are.report.activity.ActivityRangeServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Activity_Range_Data</servlet-name>
+		<url-pattern>/report/activity/range</url-pattern>
+	</servlet-mapping>
+
+	<!-- struts2 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- ConfigurationListener -->
+	<listener>
+		<listener-class>uoa.are.common.ConfigurationListener</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+</web-app>

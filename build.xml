@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="build" name="ARE">
+    <target name="init" description="init">
+        <property environment="env" />
+        <property name="name" value="ARE"/>
+        <property name="src" value="${basedir}/src"/>
+        <property name="web_content" value="${basedir}/WebContent"/>
+        <property name="lib" value="${web_content}/WEB-INF/lib"/>
+
+        <property name="version" value="${env.VERSION}" />
+
+        <property name="build" value="${basedir}/build"/>
+        <property name="build.src" value="${basedir}/build/ARE/src"/>
+        <property name="build.dest" value="${basedir}/build/ARE/WEB-INF/classes"/>
+        <property name="buildwar.dest" value="${basedir}/build/ARE"/>
+        <property name="war.dest" value="${basedir}/build/war"/>
+        <!--<property name="tomcatlib.dir" value="/opt/uoa/tomcat/lib"/>-->
+        <property name="tomcatlib.dir" value="/usr/share/tomcat7/lib"/>
+
+        <path id="classpath">
+            <fileset dir="${tomcatlib.dir}">
+                <include name="**/*.jar"/>
+            </fileset>
+            <fileset dir="${lib}">
+                <include name="**/*.jar"/>
+            </fileset>
+        </path>
+    </target>
+
+    <target name="prepare" depends="init" description="prepare">
+        <delete dir="${build}"/>
+        <mkdir dir="${build.src}"/>
+        <mkdir dir="${build.dest}"/>
+        <mkdir dir="${buildwar.dest}"/>
+        <mkdir dir="${war.dest}"/>
+        <copy todir="${build.src}">
+            <fileset dir="${src}"/>
+        </copy>
+        <copy todir="${buildwar.dest}">
+            <fileset dir="${web_content}"/>
+        </copy>
+    </target>
+
+    <target name="build" depends="prepare" description="build">
+        <echo message="version=${version}" />
+        <javac includeantruntime="false" srcdir="${build.src}" destdir="${build.dest}">
+            <classpath refid="classpath"/>
+            <compilerarg value="-g:lines,vars,source" />
+            <compilerarg line="-encoding UTF-8" />
+        </javac>
+        <copy todir="${build.dest}">
+            <fileset dir="${build.src}">
+                <include name="**/*.properties"/>
+                <include name="**/*.xml"/>
+                <include name="**/*.sci"/>
+            </fileset>
+        </copy>
+        <exec executable="sh" outputproperty="noOfFiles">
+            <arg value="-c" />
+            <arg value="/bin/sed -e 's/__build_number__/${version}/g' ${buildwar.dest}/WEB-INF/conf/app.properties > ${buildwar.dest}/WEB-INF/conf/app.properties.bak" />
+        </exec>
+        <exec executable="sh" outputproperty="noOfFiles">
+            <arg value="-c" />
+            <arg value="/bin/mv ${buildwar.dest}/WEB-INF/conf/app.properties.bak ${buildwar.dest}/WEB-INF/conf/app.properties" />
+        </exec>
+    </target>
+
+    <target name="war" depends="build" description="build war">
+        <delete dir="${build.src}"/>
+        <war warfile="${war.dest}/ARE.war" webxml="${buildwar.dest}/WEB-INF/web.xml">
+            <lib dir="${buildwar.dest}/WEB-INF/lib"/>
+            <classes dir="${build.dest}"/>
+            <fileset dir="${buildwar.dest}"/>
+        </war>
+    </target>
+
+    <target name="clean" depends="init" description="clean">
+        <delete dir="${build}"/>
+    </target>
+</project>
+

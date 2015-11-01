@@ -1,0 +1,3 @@
+ALTER TABLE `are`.`data` 
+ADD COLUMN `sma` DOUBLE NULL COMMENT '' AFTER `ts`,
+ADD COLUMN `angle` DOUBLE NULL COMMENT '' AFTER `sma`;

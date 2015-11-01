@@ -1,0 +1,105 @@
+.uoa-eng-logo {
+  height: 50px;
+  width: 134px;
+}
+
+.button_wrapper {
+  text-align: center;
+}
+
+.data-div {
+  display: none;
+}
+
+.navbar {
+  padding-bottom: 15px;
+}
+
+.nav {
+  padding-top: 15px;
+}
+
+.selected {
+  background-color: #FF0099;
+  color: #ffffff;
+}
+
+#unmatched_table_body td:hover {
+  cursor: pointer;
+}
+
+#chart_div_range {
+  height: 250px;
+}
+
+.act_chart {
+  height: 400px;
+}
+
+.signal_chart {
+  height: 400px;
+}
+
+#chart_div_trend {
+  height: 400px;
+}
+
+.chart-div-12 {
+  height: 400px;
+}
+
+.chart-div-6 {
+  height: 400px;
+}
+
+.chart-div-4 {
+  height: 300px;
+}
+
+.chart-div-act {
+  height: 300px;
+}
+
+.my-border {
+  border-radius: 10px;
+  border: 1px solid #8AC007;
+}
+
+#footer {
+  width: 100%;
+  bottom: 0;
+  left: 0;
+}
+
+#dropzone {
+  background: #ccccc;
+  width: 150px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#dropzone.in {
+  width: 600px;
+  height: 200px;
+  line-height: 200px;
+  font-size: larger;
+}
+
+#dropzone.hover {
+  background: lawngreen;
+}
+
+#dropzone.fade {
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+  opacity: 1;
+}
+
+.dygraph-axis-label-y {
+  font-family: Courier New, Courier, serif
+}

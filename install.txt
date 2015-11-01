@@ -1,0 +1,81 @@
+0. Dev env
+sudo apt-get install openjdk-7-jdk ant
+
+1. Install mysql
+sudo apt-get install mysql-server mysql-client
+
+2. Install tomcat
+sudo apt-get install tomcat7
+
+3. Import database
+mysql -u root -p
+
+mysql> create database are;
+Query OK, 1 row affected (0.01 sec)
+
+mysql -u root -p are < dump.sql
+
+4. Update tomcat server.xml
+sudo vi /var/lib/tomcat7/conf/server.xml
+
+Add following right before </Host>
+
+<Context docBase="ARE" path="/ARE"
+reloadable="true" source="org.eclipse.jst.jee.server:ARE">
+<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
+factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+initialSize="10" logAbandoned="true" maxActive="100" maxIdle="30"
+maxWait="10000" minEvictableIdleTimeMillis="30000" name="jdbc/ARE"
+password="root" removeAbandoned="true" removeAbandonedTimeout="60"
+testOnBorrow="true" testOnReturn="false" testWhileIdle="true"
+timeBetweenEvictionRunsMillis="30000" type="javax.sql.DataSource"
+url="jdbc:mysql://localhost:3306/are" username="root"
+validationInterval="30000" validationQuery="SELECT 1" />
+</Context> 
+
+5. Add mysql JDBC driver to tomcat lib path
+wget http://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.35.tar.gz
+Extract mysql-connector-java-5.1.35-bin.jar from the tar ball.
+Copy mysql-connector-java-5.1.35-bin.jar to /usr/share/tomcat7/lib
+
+6. Create folders
+sudo mkdir -p /opt/uoa/
+sudo chown -R tomcat7:tomcat7 /opt/uoa
+
+7. Copy ARE.war to /var/lib/tomcat7/webapps
+
+8. Install scilab
+sudo apt-get install scilab
+
+9. Update index.html
+Backup /var/lib/tomcat7/webapps/ROOT/index.html to /var/lib/tomcat7/webapps/ROOT/index.html.bak
+
+Edit /var/lib/tomcat7/webapps/ROOT/index.html to following content:
+
+<html>
+  <head>
+    <meta http-equiv="refresh" content="0;URL=http://<hostname>/ARE/">
+  </head>
+  <body>
+  </body>
+</html>
+
+10. TOMCAT Settings
+Add following line to /etc/default/tomcat7
+
+AUTHBIND=yes
+JAVA_OPTS="...... -Xmx4096m ......"
+SCILAB_EXECUTABLE=/usr/bin/scilab-cli
+SCILAB_EXECUTABLE=D:\scilab\bin\Scilex.exe
+
+11. Reboot tomcat7
+sudo service tomcat7 restart
+
+END
+
+CAUTION:
+Where running on Ubuntu 12.04 there may be some compatibility issues:
+- Set JAVA_HOME in /etc/default/tomcat7
+- Copy tomcat-jdbc.jar to /usr/share/tomcat7/lib
+- Scilab 5.3.2 does not work well, need to install Scilab 5.5.2 manually
+
