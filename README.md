@@ -1,0 +1,2 @@
+# ARE
+Activity Recognition Engine
